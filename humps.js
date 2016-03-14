@@ -46,7 +46,7 @@
     return string.split(split).join(separator);
   };
 
-  var camelize = function(string) {
+  var camelize = function(string, options) {
     if (_isNumerical(string)) {
       return string;
     }
@@ -54,7 +54,12 @@
       return chr ? chr.toUpperCase() : '';
     });
     // Ensure 1st char is always lowercase
-    return string.substr(0, 1).toLowerCase() + string.substr(1);
+    string = string.substr(0, 1).toLowerCase() + string.substr(1);
+    // rename based on a function (e.g const rename = (camelCaseKey) => camelCaseKey === 'quantity' ? 'qty' : camelCaseKey)
+    if(options.rename) {
+      string = options.rename(string);
+    }
+    return string;
   };
 
   var pascalize = function(string) {
