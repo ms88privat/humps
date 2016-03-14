@@ -56,7 +56,7 @@
     // Ensure 1st char is always lowercase
     string = string.substr(0, 1).toLowerCase() + string.substr(1);
     // rename based on a function (e.g const rename = (camelCaseKey) => camelCaseKey === 'quantity' ? 'qty' : camelCaseKey)
-    if(options.rename) {
+    if(options && options.rename) {
       string = options.rename(string);
     }
     return string;
@@ -104,8 +104,8 @@
     decamelize: decamelize,
     pascalize: pascalize,
     depascalize: decamelize,
-    camelizeKeys: function(object) {
-      return _processKeys(camelize, object);
+    camelizeKeys: function(object, options) {
+      return _processKeys(camelize, object, options);
     },
     decamelizeKeys: function(object, options) {
       return _processKeys(decamelize, object, options);
